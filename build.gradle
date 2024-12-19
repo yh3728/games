@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 repositories {
@@ -23,6 +24,7 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 tasks.withType(Test) {
@@ -37,3 +39,6 @@ allprojects {
     }
 }
 
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
